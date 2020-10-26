@@ -1,5 +1,9 @@
 <launch>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+ 
+  <arg name="namespace" default="3002bot"/>
+  <arg name="noise_multiplier" default="1.01"/>
+ 
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
   <arg name="z_pos" default="0.0"/>
@@ -13,7 +17,11 @@
     <arg name="debug" value="false"/>
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find rbe3002-turtlebot)/urdf/turtlebot3_rbe3002.urdf.xacro" />
+  <group ns = "$(arg namespace)">
+    <node pkg="rbe3002-turtlebot" type="vel_noiser.py" name="vel_noiser"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find rbe3002-turtlebot)/urdf/turtlebot3_rbe3002.urdf.xacro" />
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  </group>
 
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  
 </launch>
