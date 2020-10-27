@@ -2,6 +2,8 @@
 
   <param name="offset" type="double" value="0.01" />
 
+  <arg name="world_name" default="$(find turtlebot3_gazebo)/worlds/empty.world"/>
+
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
  
   <arg name="namespace" default="3002bot"/>
@@ -16,7 +18,7 @@
   <remap from="cmd_vel" to="cmd_vel_robot"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty.world"/>
+    <arg name="world_name" value="$(arg world_name)"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
