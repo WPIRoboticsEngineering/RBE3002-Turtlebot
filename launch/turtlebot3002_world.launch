@@ -6,8 +6,7 @@
 
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
  
-  <arg name="namespace" default="3002bot"/>
-  <arg name="noise_multiplier" default="1.01"/>
+   <arg name="noise_multiplier" default="1.01"/>
  
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
